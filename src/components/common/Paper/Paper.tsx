@@ -10,13 +10,11 @@ export type PaperProps = LayoutProps &
   }
 
 export const Paper = styled.div<PaperProps>`
-  ${({ width, height, p, pt, pr, pb, pl, radius, bgColor, borderColor }) =>
+  ${({ radius, bgColor, borderColor, ...styleProps }) =>
     css`
-      ${layoutStyles({ width, height })}
-      ${paddingStyles({ p, pt, pr, pb, pl })}
+      ${layoutStyles(styleProps)}
+      ${paddingStyles(styleProps)}
 
-      ${width && `width: ${typeof width === 'string' ? width : `${width}px`};`}
-      ${height && `height: ${typeof height === 'string' ? height : `${height}px`};`}
       ${radius && `border-radius: ${typeof radius === 'string' ? radius : `${radius}px`};`}
       ${bgColor && `background-color: ${bgColor};`}
       ${borderColor && `border: 1px solid ${borderColor};`}

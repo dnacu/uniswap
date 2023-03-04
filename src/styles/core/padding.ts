@@ -1,3 +1,4 @@
+import { addStyleUnit } from '@utils/addStyleUnit'
 import { css } from 'styled-components'
 
 export type PaddingProps = {
@@ -6,12 +7,16 @@ export type PaddingProps = {
   pr?: number | string
   pb?: number | string
   pl?: number | string
+  px?: number | string
+  py?: number | string
 }
 
-export const paddingStyles = ({ p, pt, pr, pb, pl }: PaddingProps) => css`
-  ${p && `padding: ${typeof p === 'string' ? p : `${p}px`};`}
-  ${pt && `padding-top: ${typeof pt === 'string' ? pt : `${pt}px`};`}
-  ${pr && `padding-right: ${typeof pr === 'string' ? pr : `${pr}px`};`}
-  ${pb && `padding-bottom: ${typeof pb === 'string' ? pb : `${pb}px`};`}
-  ${pl && `padding-left: ${typeof pl === 'string' ? pl : `${pl}px`};`}
+export const paddingStyles = ({ p, pt, pr, pb, pl, px, py }: PaddingProps) => css`
+  ${p && `padding: ${addStyleUnit(p)};`}
+  ${pt && `padding-top: ${addStyleUnit(pt)};`}
+  ${pr && `padding-right: ${addStyleUnit(pr)};`}
+  ${pb && `padding-bottom: ${addStyleUnit(pb)};`}
+  ${pl && `padding-left: ${addStyleUnit(pl)};`}
+  ${px && `padding-left: ${addStyleUnit(px)}; padding-right: ${addStyleUnit(px)};`}
+  ${py && `padding-top: ${addStyleUnit(py)}; padding-bottom: ${addStyleUnit(py)};`}
 `
