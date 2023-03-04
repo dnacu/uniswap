@@ -1,0 +1,8 @@
+{
+  "name": "uniswap",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/dnacu/uniswap.git",
+  "author": "한규현 <winteri1276@gmail.com>",
+  "license": "MIT"
+}
