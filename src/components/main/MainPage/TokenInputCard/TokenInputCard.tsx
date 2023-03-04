@@ -1,4 +1,5 @@
 import { HStack } from '@components/common/HStack'
+import { ModalBottomSheet } from '@components/common/ModalBottomSheet'
 import { Paper } from '@components/common/Paper'
 import { VStack } from '@components/common/VStack'
 import { FC } from 'react'
@@ -15,7 +16,10 @@ export const TokenInputCard: FC<TokenInputCardProps> = ({ className }) => (
     <VStack gap={8}>
       <HStack align="center" justify="space-between">
         <StyledTokenInput />
-        <StyledTokenSelectChip />
+        <ModalBottomSheet
+          renderOpener={({ open }) => <StyledTokenSelectChip onClick={open} />}
+          renderContent={() => <div>asdasdasdasdasd</div>}
+        />
       </HStack>
     </VStack>
   </StyledPaper>
