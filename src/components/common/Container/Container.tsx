@@ -1,4 +1,4 @@
-import { BREAKPOINTS } from '@styles/breakpoints'
+import { DEVICE_MEDIA } from '@styles/core/breakpoints'
 import { PaddingProps, paddingStyles } from '@styles/core/padding'
 import styled, { css } from 'styled-components'
 
@@ -18,7 +18,7 @@ export const Container = styled.div<ContainerProps>`
   margin: 0 auto;
   overflow-x: hidden;
 
-  @media ${BREAKPOINTS.MOBILE} {
+  @media ${DEVICE_MEDIA.MOBILE} {
     width: calc(100% - 40px);
   }
 `
