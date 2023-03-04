@@ -17,6 +17,7 @@ export default defineConfig({
       '@utils': resolve(__dirname, './src/utils'),
       '@constants': resolve(__dirname, './src/constants'),
       '@hooks': resolve(__dirname, './src/hooks'),
+      types: resolve(__dirname, './src/types'),
     },
   },
 })
