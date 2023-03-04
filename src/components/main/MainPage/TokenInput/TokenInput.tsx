@@ -1,9 +1,13 @@
-import { useState } from 'react'
+import { FC, useState } from 'react'
 import styled from 'styled-components'
 
 const MAX_DECIMAL_POINT = 10
 
-export const TokenInput = () => {
+type TokenInputProps = {
+  className?: string
+}
+
+export const TokenInput: FC<TokenInputProps> = ({ className }) => {
   const [tokenAmount, setTokenAmount] = useState('')
 
   const checkIfOverMaxDecimalPoint = (value: string) => {
@@ -21,6 +25,7 @@ export const TokenInput = () => {
 
   return (
     <StyledInput
+      className={className}
       type="number"
       inputMode="decimal"
       placeholder="0"
