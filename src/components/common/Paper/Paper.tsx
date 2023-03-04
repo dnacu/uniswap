@@ -1,15 +1,20 @@
-import { LayoutProps, layoutStyles } from '@styles/core/layout'
-import { PaddingProps, paddingStyles } from '@styles/core/padding'
+import { BaseProps } from '@styles/core/base'
+import { layoutProps, LayoutProps, layoutStyles } from '@styles/core/layout'
+import { paddingProps, PaddingProps, paddingStyles } from '@styles/core/padding'
+import { PropsWithChildren } from 'react'
 import styled, { css } from 'styled-components'
 
-export type PaperProps = LayoutProps &
-  PaddingProps & {
-    radius?: number
-    bgColor?: string
-    borderColor?: string
-  }
+type PaperStyleProps = LayoutProps &
+  PaddingProps & { radius?: number; bgColor?: string; borderColor?: string }
+type PaperComponentProps = PropsWithChildren<BaseProps>
+type PaperProps = PaperStyleProps & PaperComponentProps
 
-export const Paper = styled.div<PaperProps>`
+export const Paper = styled(({ as: CustomTag = 'p', ...props }: PaperComponentProps) => (
+  <CustomTag {...props} />
+)).withConfig({
+  shouldForwardProp: (prop) =>
+    !['radius', 'bgColor', 'borderColor', ...paddingProps, ...layoutProps].includes(prop),
+})<PaperProps>`
   ${({ radius, bgColor, borderColor, ...styleProps }) =>
     css`
       ${layoutStyles(styleProps)}

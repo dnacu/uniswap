@@ -1,6 +1,8 @@
 import { addStyleUnit } from '@utils/addStyleUnit'
 import { css } from 'styled-components'
 
+export const layoutProps = ['width', 'height', 'maxWidth', 'maxHeight', 'minWidth', 'minHeight']
+
 export type LayoutProps = {
   width?: number | string
   height?: number | string
@@ -10,7 +12,14 @@ export type LayoutProps = {
   minHeight?: number | string
 }
 
-export const layoutStyles = ({ width, height, maxWidth, maxHeight, minWidth, minHeight }: LayoutProps) => css`
+export const layoutStyles = ({
+  width,
+  height,
+  maxWidth,
+  maxHeight,
+  minWidth,
+  minHeight,
+}: LayoutProps) => css`
   ${width && `width: ${addStyleUnit(width)};`}
   ${height && `height: ${addStyleUnit(height)};`}
   ${maxWidth && `max-width: ${addStyleUnit(maxWidth)};`}

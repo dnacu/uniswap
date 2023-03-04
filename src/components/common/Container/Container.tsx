@@ -1,12 +1,20 @@
+import { BaseProps } from '@styles/core/base'
 import { DEVICE_MEDIA } from '@styles/core/breakpoints'
-import { PaddingProps, paddingStyles } from '@styles/core/padding'
+import { paddingProps, PaddingProps, paddingStyles } from '@styles/core/padding'
+import { PropsWithChildren } from 'react'
 import styled, { css } from 'styled-components'
 
-type ContainerProps = PaddingProps & {
+type ContainerStyleProps = PaddingProps & {
   size: 'sm' | 'md'
 }
+type ContainerComponentProps = PropsWithChildren<BaseProps>
+type ContainerProps = ContainerStyleProps & ContainerComponentProps
 
-export const Container = styled.div<ContainerProps>`
+export const Container = styled(({ as: CustomTag = 'p', ...props }: ContainerComponentProps) => (
+  <CustomTag {...props} />
+)).withConfig({
+  shouldForwardProp: (prop) => !['size', ...paddingProps].includes(prop),
+})<ContainerProps>`
   ${({ size, ...styleProps }) => css`
     ${paddingStyles(styleProps)}
 

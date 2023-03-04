@@ -1,6 +1,8 @@
 import { addStyleUnit } from '@utils/addStyleUnit'
 import { css } from 'styled-components'
 
+export const paddingProps = ['p', 'pt', 'pr', 'pb', 'pl', 'px', 'py']
+
 export type PaddingProps = {
   p?: number | string
   pt?: number | string
