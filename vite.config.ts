@@ -12,6 +12,11 @@ export default defineConfig({
     alias: {
       '@': resolve(__dirname, './src'),
       '@styles': resolve(__dirname, './src/styles'),
+      '@components': resolve(__dirname, './src/components'),
+      '@pages': resolve(__dirname, './src/pages'),
+      '@utils': resolve(__dirname, './src/utils'),
+      '@constants': resolve(__dirname, './src/constants'),
+      '@hooks': resolve(__dirname, './src/hooks'),
     },
   },
 })
