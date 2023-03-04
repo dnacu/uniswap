@@ -9,7 +9,7 @@ type PaperStyleProps = LayoutProps &
 type PaperComponentProps = PropsWithChildren<BaseProps>
 type PaperProps = PaperStyleProps & PaperComponentProps
 
-export const Paper = styled(({ as: CustomTag = 'p', ...props }: PaperComponentProps) => (
+export const Paper = styled(({ as: CustomTag = 'div', ...props }: PaperComponentProps) => (
   <CustomTag {...props} />
 )).withConfig({
   shouldForwardProp: (prop) =>

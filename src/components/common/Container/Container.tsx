@@ -10,7 +10,7 @@ type ContainerStyleProps = PaddingProps & {
 type ContainerComponentProps = PropsWithChildren<BaseProps>
 type ContainerProps = ContainerStyleProps & ContainerComponentProps
 
-export const Container = styled(({ as: CustomTag = 'p', ...props }: ContainerComponentProps) => (
+export const Container = styled(({ as: CustomTag = 'div', ...props }: ContainerComponentProps) => (
   <CustomTag {...props} />
 )).withConfig({
   shouldForwardProp: (prop) => !['size', ...paddingProps].includes(prop),
