@@ -1,8 +1,5 @@
 import { HStack } from '@components/common/HStack'
-import { ModalBottomSheet } from '@components/common/ModalBottomSheet'
 import { Paper } from '@components/common/Paper'
-import { CloseIcon } from '@components/common/svgs/CloseIcon'
-import { Typography } from '@components/common/Typography'
 import { VStack } from '@components/common/VStack'
 import { tokenList } from '@constants/tokenList'
 import { useModalState } from '@hooks/useModalState'

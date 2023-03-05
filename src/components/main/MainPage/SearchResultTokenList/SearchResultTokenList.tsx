@@ -1,4 +1,3 @@
-import { HStack } from '@components/common/HStack'
 import { Typography } from '@components/common/Typography'
 import { VStack } from '@components/common/VStack'
 import { FC } from 'react'

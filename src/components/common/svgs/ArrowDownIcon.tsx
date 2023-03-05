@@ -10,6 +10,6 @@ export const ArrowDownIcon = (props: SVGProps<SVGSVGElement>) => (
     strokeWidth={2}
     {...props}
   >
-    <path d="M0.97168 1L6.20532 6L11.439 1" stroke="white"></path>
+    <path d="M0.97168 1L6.20532 6L11.439 1" stroke="white" />
   </svg>
 )

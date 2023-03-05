@@ -8,6 +8,7 @@ const axiosInstance = axios.create({
     'Content-Type': 'application/json',
   },
   paramsSerializer: {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     serialize: (paramObj: any) => {
       const params = new URLSearchParams()
       for (const key in paramObj) {

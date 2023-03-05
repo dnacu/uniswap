@@ -2,7 +2,7 @@ import { BaseProps } from '@styles/core/base'
 import { flexProps, FlexProps, flexStyles } from '@styles/core/flex'
 import { layoutProps, LayoutProps, layoutStyles } from '@styles/core/layout'
 import { paddingProps, PaddingProps, paddingStyles } from '@styles/core/padding'
-import { PropsWithChildren, DOMAttributes, Attributes, MouseEventHandler } from 'react'
+import { PropsWithChildren, MouseEventHandler } from 'react'
 import styled, { css } from 'styled-components'
 
 type StackStyleProps = LayoutProps & PaddingProps & FlexProps

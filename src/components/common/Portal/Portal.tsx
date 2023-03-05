@@ -1,4 +1,4 @@
-import { FC, ReactElement, useEffect, useState } from 'react'
+import { FC, ReactElement } from 'react'
 import { createPortal } from 'react-dom'
 import { findOrCreateElementById } from '@utils/findOrCreateElementById'
 
