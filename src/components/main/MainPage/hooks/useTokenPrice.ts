@@ -1,4 +1,5 @@
 import { useGetTokenPriceQuery } from '@apis/getTokenPrice'
+import { FRACTION_DIGITS } from '@constants/fractionDigits'
 import { useCallback, useEffect, useState } from 'react'
 import { TokenType } from 'types/Token'
 
@@ -22,7 +23,7 @@ export const useTokenPrice = (token: TokenType) => {
     }
 
     const totalPrice = parseFloat(
-      (tokenPriceData[token.id].usd * parseFloat(amount || '0')).toFixed(2)
+      (tokenPriceData[token.id].usd * parseFloat(amount || '0')).toFixed(FRACTION_DIGITS)
     )
     setTotalPrice(totalPrice)
   }, [amount, token.id, tokenPriceData])
@@ -36,7 +37,7 @@ export const useTokenPrice = (token: TokenType) => {
       }
 
       const totalPrice = parseFloat(
-        (tokenPriceData?.[token.id].usd * parseFloat(amount)).toFixed(2)
+        (tokenPriceData?.[token.id].usd * parseFloat(amount)).toFixed(FRACTION_DIGITS)
       )
       setAmount(amount)
       setTotalPrice(totalPrice)
@@ -51,7 +52,9 @@ export const useTokenPrice = (token: TokenType) => {
       }
 
       setTotalPrice(totalPrice)
-      setAmount(`${parseFloat((totalPrice / tokenPriceData?.[token.id].usd).toFixed(5))}`)
+      setAmount(
+        `${parseFloat((totalPrice / tokenPriceData?.[token.id].usd).toFixed(FRACTION_DIGITS))}`
+      )
     },
     [token.id, tokenPriceData]
   )

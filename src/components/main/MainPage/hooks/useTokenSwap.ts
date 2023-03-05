@@ -2,6 +2,7 @@ import { useEffect } from 'react'
 import { useTokenPrice } from './useTokenPrice'
 import { usePrevious } from '@hooks/usePrevious'
 import { useSelectedToken } from './useSelectedToken'
+import { FRACTION_DIGITS } from '@constants/fractionDigits'
 
 export const useTokenSwap = () => {
   const { prevToken, nextToken, setPrevToken, setNextToken } = useSelectedToken()
@@ -42,7 +43,9 @@ export const useTokenSwap = () => {
 
   const exchangeRate =
     prevTokenAmount && nextTokenAmount
-      ? parseFloat((parseFloat(prevTokenAmount) / parseFloat(nextTokenAmount)).toFixed(10))
+      ? parseFloat(
+          (parseFloat(prevTokenAmount) / parseFloat(nextTokenAmount)).toFixed(FRACTION_DIGITS)
+        )
       : 0
 
   return {
