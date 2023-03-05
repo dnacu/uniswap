@@ -1,5 +1,5 @@
 import { useGetTokenPriceQuery } from '@apis/getTokenPrice'
-import { useCallback, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { TokenType } from 'types/Token'
 
 export type TokenPriceType = TokenType & {
@@ -14,13 +14,18 @@ export const useTokenPrice = (token: TokenType) => {
 
   const { data: tokenPriceData } = useGetTokenPriceQuery({
     variables: { ids: token.id },
-    options: {
-      onSuccess: (data) => {
-        const totalPrice = parseFloat((data[token.id].usd * parseFloat(amount || '0')).toFixed(2))
-        setTotalPrice(totalPrice)
-      },
-    },
   })
+
+  useEffect(() => {
+    if (!tokenPriceData) {
+      return
+    }
+
+    const totalPrice = parseFloat(
+      (tokenPriceData[token.id].usd * parseFloat(amount || '0')).toFixed(2)
+    )
+    setTotalPrice(totalPrice)
+  }, [amount, token.id, tokenPriceData])
 
   const changeAmount = useCallback(
     (amount: string) => {
