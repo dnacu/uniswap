@@ -5,6 +5,7 @@ import { Space } from '@components/common/Space'
 import { SettingIcon } from '@components/common/svgs/SettingIcon'
 import { Typography } from '@components/common/Typography'
 import { VStack } from '@components/common/VStack'
+import { numberWithCommas } from '@utils/numberWithCommas'
 import { showPrepareAlert } from '@utils/showPrepareAlert'
 import styled from 'styled-components'
 import { useTokenSwap } from './hooks/useTokenSwap'
@@ -14,6 +15,7 @@ export const MainPage = () => {
   const {
     prevToken,
     nextToken,
+    exchangeRate,
     setPrevToken,
     setNextToken,
     setPrevTokenAmount,
@@ -48,6 +50,22 @@ export const MainPage = () => {
               onTokenChange={setNextToken}
               onTokenAmountChange={setNextTokenAmount}
             />
+            {exchangeRate && (
+              <Paper
+                px={12}
+                py={8}
+                radius={12}
+                bgColor="rgb(19, 26, 42)"
+                borderColor="rgb(27, 34, 54)"
+              >
+                <Typography size={14} color="white">
+                  {`1 ${nextToken.symbol} = ${exchangeRate} ${prevToken.symbol}`}
+                  <Typography as="span" size={14} color="gray">
+                    &nbsp;(${numberWithCommas(nextToken.tokenPrice, 10)})
+                  </Typography>
+                </Typography>
+              </Paper>
+            )}
           </VStack>
           <StyledButton onClick={showPrepareAlert} disabled={!isSwapButtonActive}>
             <Typography size={16} color="white">
