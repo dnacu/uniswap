@@ -3,13 +3,13 @@ import styled from 'styled-components'
 
 const MAX_DECIMAL_POINT = 10
 
-type TokenInputProps = {
+type TokenAmountInputProps = {
   className?: string
-  amount: number
-  onChange: (amount: number) => void
+  amount: string
+  onChange: (amount: string) => void
 }
 
-export const TokenInput: FC<TokenInputProps> = ({ className, amount, onChange }) => {
+export const TokenAmountInput: FC<TokenAmountInputProps> = ({ className, amount, onChange }) => {
   const checkIfOverMaxDecimalPoint = (value: string) => {
     return value.split('.')[1]?.length > MAX_DECIMAL_POINT
   }
@@ -20,7 +20,7 @@ export const TokenInput: FC<TokenInputProps> = ({ className, amount, onChange })
       return
     }
 
-    onChange(parseFloat(value || '0'))
+    onChange(value)
   }
 
   return (

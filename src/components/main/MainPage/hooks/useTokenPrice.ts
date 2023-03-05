@@ -15,14 +15,14 @@ const prevTokenAtom = atom<TokenType>(defaultPrevToken)
 const nextTokenAtom = atom<TokenType>(defaultNextToken)
 
 export type TokenPriceType = TokenType & {
-  amount: number
+  amount: string
   tokenPrice: number
   totalPrice: number
 }
 
 export const useTokenPrice = () => {
-  const [prevTokenAmount, setPrevTokenAmount] = useState(0)
-  const [nextTokenAmount, setNextTokenAmount] = useState(0)
+  const [prevTokenAmount, setPrevTokenAmount] = useState('')
+  const [nextTokenAmount, setNextTokenAmount] = useState('')
 
   const [prevTotalPrice, setPrevTotalPrice] = useState(0)
   const [nextTotalPrice, setNextTotalPrice] = useState(0)
@@ -34,7 +34,9 @@ export const useTokenPrice = () => {
     variables: { ids: prevToken.id },
     options: {
       onSuccess: (data) => {
-        const totalPrice = parseFloat((data[prevToken.id].usd * prevTokenAmount).toFixed(2))
+        const totalPrice = parseFloat(
+          (data[prevToken.id].usd * parseFloat(prevTokenAmount || '0')).toFixed(2)
+        )
         setPrevTotalPrice(totalPrice)
       },
     },
@@ -43,7 +45,9 @@ export const useTokenPrice = () => {
     variables: { ids: nextToken.id },
     options: {
       onSuccess: (data) => {
-        const totalPrice = parseFloat((data[prevToken.id].usd * nextTokenAmount).toFixed(2))
+        const totalPrice = parseFloat(
+          (data[prevToken.id].usd * parseFloat(nextTokenAmount || '0')).toFixed(2)
+        )
         setNextTotalPrice(totalPrice)
       },
     },
@@ -60,35 +64,35 @@ export const useTokenPrice = () => {
 
   useEffect(() => {
     const prevTokenAmount = parseFloat((nextTotalPrice / prevTokenPrice).toFixed(10))
-    setPrevTokenAmount(prevTokenAmount)
+    setPrevTokenAmount(`${prevTokenAmount}`)
   }, [prevTokenPrice, nextTotalPrice])
 
   useEffect(() => {
     const nextTokenAmount = parseFloat((prevTotalPrice / nextTokenPrice).toFixed(10))
-    setNextTokenAmount(nextTokenAmount)
+    setNextTokenAmount(`${nextTokenAmount}`)
   }, [nextTokenPrice, prevTotalPrice])
 
-  const updatePrevTokenAmount = (amount: number) => {
-    setPrevTokenAmount(amount)
+  const updatePrevTokenAmount = (amount: string) => {
+    setPrevTokenAmount(`${amount}`)
 
-    const prevTokenTotalPrice = parseFloat((amount * prevTokenPrice).toFixed(2))
+    const prevTokenTotalPrice = parseFloat((parseFloat(amount || '0') * prevTokenPrice).toFixed(2))
     const nextTokenAmount = parseFloat((prevTokenTotalPrice / nextTokenPrice).toFixed(10))
     const nextTokenTotalPrice = parseFloat((nextTokenAmount * nextTokenPrice).toFixed(2))
 
     setPrevTotalPrice(prevTokenTotalPrice)
-    setNextTokenAmount(nextTokenAmount)
+    setNextTokenAmount(`${nextTokenAmount}`)
     setNextTotalPrice(nextTokenTotalPrice)
   }
 
-  const updateNextTokenAmount = (amount: number) => {
-    setNextTokenAmount(amount)
+  const updateNextTokenAmount = (amount: string) => {
+    setNextTokenAmount(`${amount}`)
 
-    const nextTokenTotalPrice = parseFloat((amount * nextTokenPrice).toFixed(2))
+    const nextTokenTotalPrice = parseFloat((parseFloat(amount || '0') * nextTokenPrice).toFixed(2))
     const prevTokenAmount = parseFloat((nextTokenTotalPrice / prevTokenPrice).toFixed(10))
     const prevTokenTotalPrice = parseFloat((prevTokenAmount * prevTokenPrice).toFixed(2))
 
     setNextTotalPrice(nextTokenTotalPrice)
-    setPrevTokenAmount(prevTokenAmount)
+    setPrevTokenAmount(`${prevTokenAmount}`)
     setPrevTotalPrice(prevTokenTotalPrice)
   }
 

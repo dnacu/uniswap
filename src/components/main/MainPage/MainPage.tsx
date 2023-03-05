@@ -20,7 +20,7 @@ export const MainPage = () => {
     setNextTokenAmount,
   } = useTokenPrice()
 
-  const isSwapButtonActive = prevToken.amount > 0 && nextToken.amount > 0
+  const isSwapButtonActive = parseFloat(prevToken.amount) > 0 && parseFloat(nextToken.amount) > 0
 
   return (
     <Container as="main" size="sm" pt={140}>

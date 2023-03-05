@@ -4,22 +4,32 @@ import { FC } from 'react'
 import styled from 'styled-components'
 import { TokenType } from 'types/Token'
 import { useRecentlyUsedTokenList } from '../hooks/useRecentlyUsedTokenList'
+import { useTokenPrice } from '../hooks/useTokenPrice'
 
 type RecentlySelectedTokenListProps = {
   onSelect: (selectedToken: TokenType) => void
 }
 
 export const RecentlySelectedTokenList: FC<RecentlySelectedTokenListProps> = ({ onSelect }) => {
+  const { prevToken, nextToken } = useTokenPrice()
   const { recentlyUsedTokenList } = useRecentlyUsedTokenList()
 
   const handleSelect = (selectedToken: TokenType) => () => {
     onSelect(selectedToken)
   }
 
+  const getIsAlreadySelected = (token: TokenType) => {
+    return [prevToken.id, nextToken.id].includes(token.id)
+  }
+
   return (
     <HStack gap={8} height={83} wrap="wrap">
       {recentlyUsedTokenList.map((token: TokenType) => (
-        <StyledButton key={token.id} onClick={handleSelect(token)}>
+        <StyledButton
+          key={token.id}
+          disabled={getIsAlreadySelected(token)}
+          onClick={handleSelect(token)}
+        >
           <Typography size={16} weight={500} color="white">
             {token.symbol.toUpperCase()}
           </Typography>
@@ -33,4 +43,9 @@ const StyledButton = styled.button`
   padding: 8px 12px;
   border-radius: 20px;
   background-color: rgb(27, 34, 54);
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: default;
+  }
 `

@@ -1,6 +1,6 @@
 import { TokenType } from 'types/Token'
 
-export const tokenList: readonly TokenType[] = [
+export const tokenList: TokenType[] = [
   { symbol: 'ETH', id: 'ethereum' },
   { symbol: 'USDT', id: 'tether' },
   { symbol: 'USDC', id: 'usd-coin' },
@@ -11,4 +11,4 @@ export const tokenList: readonly TokenType[] = [
   { symbol: 'COMP', id: 'compound-coin' },
   { symbol: 'CRV', id: 'curve-dao-token' },
   { symbol: 'ENS', id: 'ethereum-name-service' },
-] as const
+]
