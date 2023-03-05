@@ -20,7 +20,7 @@ Build production artifacts
 % yarn build
 ```
 
-Start the application using built product
+Start the application using built product (port: 4173)
 
 ```
 % yarn preview
