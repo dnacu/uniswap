@@ -93,7 +93,6 @@ const StyledModalContent = styled.div<{ open: boolean }>`
   transform: translate(-50%, -50%);
 
   width: 460px;
-  height: 600px;
   background-color: rgb(13, 17, 28);
   border: 1px solid rgb(27, 34, 54);
   border-radius: 20px;

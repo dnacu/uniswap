@@ -3,6 +3,7 @@ import { ModalBottomSheet } from '@components/common/ModalBottomSheet'
 import { CloseIcon } from '@components/common/svgs/CloseIcon'
 import { Typography } from '@components/common/Typography'
 import { VStack } from '@components/common/VStack'
+import { showPrepareAlert } from '@utils/showPrepareAlert'
 import { FC, useState } from 'react'
 import styled from 'styled-components'
 import { TokenType } from 'types/Token'
@@ -51,6 +52,15 @@ export const TokenSelectModalBottomSheet: FC<TokenSelectModalBottomSheetProps> =
           <Divider />
 
           <SearchResultTokenList query={searchKeyword} onSelect={handleSelectToken} />
+
+          <VStack>
+            <Divider />
+            <StyledButton onClick={showPrepareAlert}>
+              <Typography size={16} color="rgb(76, 130, 251)">
+                토큰 목록 관리
+              </Typography>
+            </StyledButton>
+          </VStack>
         </VStack>
       )}
     />
@@ -65,4 +75,10 @@ const Divider = styled.div`
   width: 100%;
   height: 1px;
   background-color: rgb(27, 34, 54);
+`
+
+const StyledButton = styled.button`
+  width: 100%;
+  height: 56px;
+  background-color: rgb(19, 26, 42);
 `
