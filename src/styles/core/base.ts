@@ -1,4 +1,4 @@
 export type BaseProps = {
-  as?: keyof JSX.IntrinsicElements
+  as?: Exclude<keyof JSX.IntrinsicElements, 'svg'>
   className?: string
 }

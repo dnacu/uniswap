@@ -4,28 +4,41 @@ import { Paper } from '@components/common/Paper'
 import { CloseIcon } from '@components/common/svgs/CloseIcon'
 import { Typography } from '@components/common/Typography'
 import { VStack } from '@components/common/VStack'
+import { tokenList } from '@constants/tokenList'
 import { useModalState } from '@hooks/useModalState'
-import { FC } from 'react'
+import { FC, useState } from 'react'
 import styled from 'styled-components'
-import { RecentlySelectedTokenList } from '../RecentlySelectedTokenList'
+import { SymbolType, TokenType } from 'types/Token'
 import { TokenInput } from '../TokenInput/TokenInput'
-import { TokenSearchInput } from '../TokenSearchInput'
 import { TokenSelectChip } from '../TokenSelectChip'
 import { TokenSelectModalBottomSheet } from '../TokenSelectModalBottomSheet/TokenSelectModalBottomSheet'
 
 type TokenInputCardProps = {
   className?: string
+  defaultTokenSymbol: SymbolType
 }
 
-export const TokenInputCard: FC<TokenInputCardProps> = ({ className }) => {
+export const TokenInputCard: FC<TokenInputCardProps> = ({ className, defaultTokenSymbol }) => {
+  const [token, setToken] = useState<TokenType>(
+    tokenList.find((token) => token.symbol === defaultTokenSymbol) ?? tokenList[0]
+  )
   const { isModalOpen, openModal, closeModal } = useModalState()
+
+  const handleSelectToken = (selectedToken: TokenType) => {
+    setToken(selectedToken)
+  }
+
   return (
     <StyledPaper className={className} p={16} radius={12} bgColor="rgb(19, 26, 42)">
       <VStack gap={8}>
         <HStack align="center" justify="space-between">
           <StyledTokenInput />
-          <StyledTokenSelectChip onClick={openModal} />
-          <TokenSelectModalBottomSheet opened={isModalOpen} onClose={closeModal} />
+          <StyledTokenSelectChip selectedToken={token} onClick={openModal} />
+          <TokenSelectModalBottomSheet
+            opened={isModalOpen}
+            onClose={closeModal}
+            onSelectToken={handleSelectToken}
+          />
         </HStack>
       </VStack>
     </StyledPaper>

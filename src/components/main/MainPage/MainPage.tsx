@@ -5,6 +5,7 @@ import { Space } from '@components/common/Space'
 import { SettingIcon } from '@components/common/svgs/SettingIcon'
 import { Typography } from '@components/common/Typography'
 import { VStack } from '@components/common/VStack'
+import { tokenList } from '@constants/tokenList'
 import styled from 'styled-components'
 import { TokenInputCard } from './TokenInputCard'
 
@@ -27,8 +28,8 @@ export const MainPage = () => {
 
         <VStack gap={32}>
           <VStack gap={4}>
-            <TokenInputCard key="prev" />
-            <TokenInputCard key="next" />
+            <TokenInputCard key="prev" defaultTokenSymbol="DAI" />
+            <TokenInputCard key="next" defaultTokenSymbol="USDC" />
           </VStack>
           <Paper as="button" p={16} radius={20} bgColor="rgb(76, 130, 251)">
             <Typography size={16} color="white">

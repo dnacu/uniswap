@@ -5,13 +5,23 @@ import styled from 'styled-components'
 
 type TokenSearchInputProps = {
   className?: string
+  onChange: (value: string) => void
 }
 
-export const TokenSearchInput: FC<TokenSearchInputProps> = ({ className }) => {
+export const TokenSearchInput: FC<TokenSearchInputProps> = ({ className, onChange }) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    onChange(e.target.value)
+  }
+
   return (
     <StyledVStack>
       <StyledSearchIcon />
-      <StyledInput className={className} type="text" placeholder="토큰 이름을 입력하세요" />
+      <StyledInput
+        className={className}
+        type="text"
+        placeholder="토큰 이름을 입력하세요"
+        onChange={handleChange}
+      />
     </StyledVStack>
   )
 }

@@ -3,13 +3,19 @@ import { Paper } from '@components/common/Paper'
 import { ArrowDownIcon } from '@components/common/svgs/ArrowDownIcon'
 import { Typography } from '@components/common/Typography'
 import { FC } from 'react'
+import { TokenType } from 'types/Token'
 
 type TokenSelectChipProps = {
   className?: string
+  selectedToken: TokenType
   onClick?: () => void
 }
 
-export const TokenSelectChip: FC<TokenSelectChipProps> = ({ className, onClick }) => {
+export const TokenSelectChip: FC<TokenSelectChipProps> = ({
+  className,
+  selectedToken,
+  onClick,
+}) => {
   return (
     <Paper
       className={className}
@@ -22,7 +28,7 @@ export const TokenSelectChip: FC<TokenSelectChipProps> = ({ className, onClick }
     >
       <HStack gap={8} align="center">
         <Typography size={20} weight={600} color="white">
-          USDT
+          {selectedToken.symbol}
         </Typography>
         <ArrowDownIcon />
       </HStack>
