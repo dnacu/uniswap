@@ -1,15 +1,15 @@
-import { FC, useState } from 'react'
+import { FC } from 'react'
 import styled from 'styled-components'
 
 const MAX_DECIMAL_POINT = 10
 
 type TokenInputProps = {
   className?: string
+  amount: number
+  onChange: (amount: number) => void
 }
 
-export const TokenInput: FC<TokenInputProps> = ({ className }) => {
-  const [tokenAmount, setTokenAmount] = useState('')
-
+export const TokenInput: FC<TokenInputProps> = ({ className, amount, onChange }) => {
   const checkIfOverMaxDecimalPoint = (value: string) => {
     return value.split('.')[1]?.length > MAX_DECIMAL_POINT
   }
@@ -20,7 +20,7 @@ export const TokenInput: FC<TokenInputProps> = ({ className }) => {
       return
     }
 
-    setTokenAmount(value)
+    onChange(parseFloat(value || '0'))
   }
 
   return (
@@ -30,7 +30,7 @@ export const TokenInput: FC<TokenInputProps> = ({ className }) => {
       inputMode="decimal"
       placeholder="0"
       step="0.0000000001"
-      value={tokenAmount}
+      value={amount}
       onChange={handleTokenAmountChange}
     />
   )

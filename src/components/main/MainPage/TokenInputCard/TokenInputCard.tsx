@@ -1,43 +1,49 @@
 import { HStack } from '@components/common/HStack'
 import { Paper } from '@components/common/Paper'
+import { Typography } from '@components/common/Typography'
 import { VStack } from '@components/common/VStack'
-import { tokenList } from '@constants/tokenList'
 import { useModalState } from '@hooks/useModalState'
-import { FC, useState } from 'react'
+import { FC } from 'react'
 import styled from 'styled-components'
-import { SymbolType, TokenType } from 'types/Token'
+import { TokenType } from 'types/Token'
+import { TokenPriceType } from '../hooks/useTokenPrice'
 import { TokenInput } from '../TokenInput/TokenInput'
 import { TokenSelectChip } from '../TokenSelectChip'
 import { TokenSelectModalBottomSheet } from '../TokenSelectModalBottomSheet/TokenSelectModalBottomSheet'
 
 type TokenInputCardProps = {
   className?: string
-  defaultTokenSymbol: SymbolType
+  token: TokenPriceType
+  onTokenChange: (token: TokenType) => void
+  onTokenAmountChange: (amount: number) => void
 }
 
-export const TokenInputCard: FC<TokenInputCardProps> = ({ className, defaultTokenSymbol }) => {
-  const [token, setToken] = useState<TokenType>(
-    tokenList.find((token) => token.symbol === defaultTokenSymbol) ?? tokenList[0]
-  )
+export const TokenInputCard: FC<TokenInputCardProps> = ({
+  className,
+  token,
+  onTokenChange,
+  onTokenAmountChange,
+}) => {
   const { isModalOpen, openModal, closeModal } = useModalState()
-
-  const handleSelectToken = (selectedToken: TokenType) => {
-    setToken(selectedToken)
-  }
 
   return (
     <StyledPaper className={className} p={16} radius={12} bgColor="rgb(19, 26, 42)">
       <VStack gap={8}>
         <HStack align="center" justify="space-between">
-          <StyledTokenInput />
+          <StyledTokenInput amount={token.amount} onChange={onTokenAmountChange} />
           <StyledTokenSelectChip selectedToken={token} onClick={openModal} />
-          <TokenSelectModalBottomSheet
-            opened={isModalOpen}
-            onClose={closeModal}
-            onSelectToken={handleSelectToken}
-          />
         </HStack>
+        <VStack>
+          <Typography size={14} color="rgb(152, 161, 192)">
+            ${token.totalPrice}
+          </Typography>
+        </VStack>
       </VStack>
+      <TokenSelectModalBottomSheet
+        opened={isModalOpen}
+        onClose={closeModal}
+        onSelectToken={onTokenChange}
+      />
     </StyledPaper>
   )
 }
