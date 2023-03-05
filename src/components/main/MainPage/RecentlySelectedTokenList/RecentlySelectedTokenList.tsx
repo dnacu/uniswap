@@ -4,14 +4,14 @@ import { FC } from 'react'
 import styled from 'styled-components'
 import { TokenType } from 'types/Token'
 import { useRecentlyUsedTokenList } from '../hooks/useRecentlyUsedTokenList'
-import { useTokenSwap } from '../hooks/useTokenSwap'
+import { useSelectedToken } from '../hooks/useSelectedToken'
 
 type RecentlySelectedTokenListProps = {
   onSelect: (selectedToken: TokenType) => void
 }
 
 export const RecentlySelectedTokenList: FC<RecentlySelectedTokenListProps> = ({ onSelect }) => {
-  const { prevToken, nextToken } = useTokenSwap()
+  const { prevToken, nextToken } = useSelectedToken()
   const { recentlyUsedTokenList } = useRecentlyUsedTokenList()
 
   const handleSelect = (selectedToken: TokenType) => () => {

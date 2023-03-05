@@ -20,6 +20,7 @@ export default defineConfig({
       '@hooks': resolve(__dirname, './src/hooks'),
       '@apis': resolve(__dirname, './src/apis'),
       '@libs': resolve(__dirname, './src/libs'),
+      '@store': resolve(__dirname, './src/store'),
       types: resolve(__dirname, './src/types'),
     },
   },
