@@ -1,4 +1,3 @@
-import { BaseProps } from '@styles/core/base'
 import { LayoutProps } from '@styles/core/layout'
 import { addStyleUnit } from '@utils/addStyleUnit'
 import styled, { css } from 'styled-components'

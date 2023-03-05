@@ -1,7 +1,18 @@
 import { addStyleUnit } from '@utils/addStyleUnit'
 import { css } from 'styled-components'
 
-export const layoutProps = ['width', 'height', 'maxWidth', 'maxHeight', 'minWidth', 'minHeight']
+export const layoutProps = [
+  'width',
+  'height',
+  'maxWidth',
+  'maxHeight',
+  'minWidth',
+  'minHeight',
+  'overflow',
+  'overflowX',
+  'overflowY',
+  'hideScroll',
+]
 
 export type LayoutProps = {
   width?: number | string
@@ -10,6 +21,10 @@ export type LayoutProps = {
   maxHeight?: number | string
   minWidth?: number | string
   minHeight?: number | string
+  overflow?: 'hidden' | 'auto' | 'scroll' | 'visible'
+  overflowX?: 'hidden' | 'auto' | 'scroll' | 'visible'
+  overflowY?: 'hidden' | 'auto' | 'scroll' | 'visible'
+  hideScroll?: boolean
 }
 
 export const layoutStyles = ({
@@ -19,6 +34,10 @@ export const layoutStyles = ({
   maxHeight,
   minWidth,
   minHeight,
+  overflow,
+  overflowX,
+  overflowY,
+  hideScroll,
 }: LayoutProps) => css`
   ${width && `width: ${addStyleUnit(width)};`}
   ${height && `height: ${addStyleUnit(height)};`}
@@ -26,4 +45,16 @@ export const layoutStyles = ({
   ${maxHeight && `max-height: ${addStyleUnit(maxHeight)};`}
   ${minWidth && `min-width: ${addStyleUnit(minWidth)};`}
   ${minHeight && `min-height: ${addStyleUnit(minHeight)};`}
+  ${overflow && `overflow: ${overflow};`}
+  ${overflowX && `overflow-x: ${overflowX};`}
+  ${overflowY && `overflow-y: ${overflowY};`}
+  ${hideScroll &&
+  `
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  `}
 `
