@@ -1,9 +1,10 @@
 import { Typography } from '@components/common/Typography'
 import { VStack } from '@components/common/VStack'
 import { FC } from 'react'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import { TokenType } from 'types/Token'
 import { useSearchToken } from '../hooks/useSearchToken'
+import { useTokenPrice } from '../hooks/useTokenPrice'
 
 type SearchResultTokenListProps = {
   query: string
@@ -12,28 +13,49 @@ type SearchResultTokenListProps = {
 
 export const SearchResultTokenList: FC<SearchResultTokenListProps> = ({ query, onSelect }) => {
   const { tokens } = useSearchToken(query)
+  const { prevToken, nextToken } = useTokenPrice()
 
   const handleSelect = (token: TokenType) => () => {
     onSelect(token)
   }
 
+  const getIsAlreadySelected = (token: TokenType) => {
+    return [prevToken.id, nextToken.id].includes(token.id)
+  }
+
   return (
     <VStack height={370} overflowY="scroll" hideScroll={true}>
       {tokens.map((token) => (
-        <StyledVStack key={token.id} py={16} px={20} onClick={handleSelect(token)}>
+        <StyledToken
+          key={token.id}
+          py={16}
+          px={20}
+          selected={getIsAlreadySelected(token)}
+          onClick={handleSelect(token)}
+        >
           <Typography size={16} weight={500} color="white">
             {token.symbol}
           </Typography>
-        </StyledVStack>
+        </StyledToken>
       ))}
     </VStack>
   )
 }
 
-const StyledVStack = styled(VStack)`
+const StyledToken = styled(VStack)<{ selected: boolean }>`
   cursor: pointer;
 
   &:hover {
     background-color: rgba(184, 192, 220, 0.08);
   }
+
+  ${({ selected }) =>
+    selected &&
+    css`
+      opacity: 0.5;
+      cursor: default;
+      &:hover {
+        background-color: transparent;
+      }
+    `}
 `

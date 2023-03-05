@@ -4,7 +4,7 @@ import { CloseIcon } from '@components/common/svgs/CloseIcon'
 import { Typography } from '@components/common/Typography'
 import { VStack } from '@components/common/VStack'
 import { showPrepareAlert } from '@utils/showPrepareAlert'
-import { FC, useState } from 'react'
+import { FC, useEffect, useState } from 'react'
 import styled from 'styled-components'
 import { TokenType } from 'types/Token'
 import { useRecentlyUsedTokenList } from '../hooks/useRecentlyUsedTokenList'
@@ -25,6 +25,12 @@ export const TokenSelectModalBottomSheet: FC<TokenSelectModalBottomSheetProps> =
 }) => {
   const { addRecentlyUsedToken } = useRecentlyUsedTokenList()
   const [searchKeyword, setSearchKeyword] = useState('')
+
+  useEffect(() => {
+    if (opened) {
+      setSearchKeyword('')
+    }
+  }, [opened])
 
   const handleSelectToken = (selectedToken: TokenType) => {
     addRecentlyUsedToken(selectedToken)

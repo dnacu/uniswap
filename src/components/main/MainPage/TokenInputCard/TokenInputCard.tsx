@@ -7,7 +7,7 @@ import { FC } from 'react'
 import styled from 'styled-components'
 import { TokenType } from 'types/Token'
 import { TokenPriceType } from '../hooks/useTokenPrice'
-import { TokenInput } from '../TokenInput/TokenInput'
+import { TokenAmountInput } from '../TokenAmountInput/TokenAmountInput'
 import { TokenSelectChip } from '../TokenSelectChip'
 import { TokenSelectModalBottomSheet } from '../TokenSelectModalBottomSheet/TokenSelectModalBottomSheet'
 
@@ -15,7 +15,7 @@ type TokenInputCardProps = {
   className?: string
   token: TokenPriceType
   onTokenChange: (token: TokenType) => void
-  onTokenAmountChange: (amount: number) => void
+  onTokenAmountChange: (amount: string) => void
 }
 
 export const TokenInputCard: FC<TokenInputCardProps> = ({
@@ -52,7 +52,7 @@ const StyledPaper = styled(Paper)`
   position: relative;
 `
 
-const StyledTokenInput = styled(TokenInput)`
+const StyledTokenInput = styled(TokenAmountInput)`
   width: 100%;
 `
 
