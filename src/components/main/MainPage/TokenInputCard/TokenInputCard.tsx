@@ -3,6 +3,7 @@ import { Paper } from '@components/common/Paper'
 import { Typography } from '@components/common/Typography'
 import { VStack } from '@components/common/VStack'
 import { useModalState } from '@hooks/useModalState'
+import { numberWithCommas } from '@utils/numberWithCommas'
 import { FC } from 'react'
 import styled from 'styled-components'
 import { TokenType } from 'types/Token'
@@ -35,7 +36,7 @@ export const TokenInputCard: FC<TokenInputCardProps> = ({
         </HStack>
         <VStack>
           <Typography size={14} color="rgb(152, 161, 192)">
-            ${new Intl.NumberFormat('en-US').format(token.totalPrice)}
+            ${numberWithCommas(token.totalPrice)}
           </Typography>
         </VStack>
       </VStack>

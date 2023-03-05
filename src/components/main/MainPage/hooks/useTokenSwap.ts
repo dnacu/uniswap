@@ -40,6 +40,11 @@ export const useTokenSwap = () => {
     updatePrevTotalPrice,
   ])
 
+  const exchangeRate =
+    prevTokenAmount && nextTokenAmount
+      ? parseFloat((parseFloat(prevTokenAmount) / parseFloat(nextTokenAmount)).toFixed(10))
+      : 0
+
   return {
     prevToken: {
       ...prevToken,
@@ -53,6 +58,7 @@ export const useTokenSwap = () => {
       tokenPrice: nextTokenPrice,
       totalPrice: nextTotalPrice,
     },
+    exchangeRate,
     setPrevToken,
     setPrevTokenAmount,
     setNextToken,
