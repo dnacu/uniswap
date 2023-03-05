@@ -8,7 +8,7 @@ Install dependencies
 % yarn
 ```
 
-Run dev
+Run dev (port: 3000)
 
 ```
 % yarn dev
