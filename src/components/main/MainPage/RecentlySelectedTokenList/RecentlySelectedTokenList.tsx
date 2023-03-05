@@ -23,7 +23,7 @@ export const RecentlySelectedTokenList: FC<RecentlySelectedTokenListProps> = ({ 
   }
 
   return (
-    <HStack gap={8} height={83} wrap="wrap">
+    <HStack gap={8} wrap="wrap">
       {recentlyUsedTokenList.map((token: TokenType) => (
         <StyledButton
           key={token.id}
