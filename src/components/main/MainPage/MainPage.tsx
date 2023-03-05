@@ -23,7 +23,6 @@ export const MainPage = () => {
   } = useTokenSwap()
 
   const isSwapButtonActive = parseFloat(prevToken.amount) > 0 && parseFloat(nextToken.amount) > 0
-  console.log(exchangeRate)
 
   return (
     <Container as="main" size="sm" pt={140}>
