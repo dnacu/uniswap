@@ -20,6 +20,8 @@ export const MainPage = () => {
     setNextTokenAmount,
   } = useTokenPrice()
 
+  const isSwapButtonActive = prevToken.amount > 0 && nextToken.amount > 0
+
   return (
     <Container as="main" size="sm" pt={140}>
       <Paper px={12} py={20} radius={16} bgColor="rgb(13, 17, 28)" borderColor="rgb(27, 34, 54)">
@@ -47,11 +49,11 @@ export const MainPage = () => {
               onTokenAmountChange={setNextTokenAmount}
             />
           </VStack>
-          <Paper as="button" p={16} radius={20} bgColor="rgb(76, 130, 251)">
+          <StyledButton onClick={showPrepareAlert} disabled={!isSwapButtonActive}>
             <Typography size={16} color="white">
               스왑
             </Typography>
-          </Paper>
+          </StyledButton>
         </VStack>
       </Paper>
     </Container>
@@ -60,4 +62,14 @@ export const MainPage = () => {
 
 const StyledSettingIcon = styled(SettingIcon)`
   cursor: pointer;
+`
+
+const StyledButton = styled.button`
+  padding: 16px;
+  border-radius: 20px;
+  background-color: rgb(76, 130, 251);
+
+  &:disabled {
+    background-color: gray;
+  }
 `
