@@ -1,22 +1,10 @@
-import { tokenList } from '@constants/tokenList'
-import { atom, useAtom } from 'jotai'
-import { TokenType } from 'types/Token'
 import { useEffect } from 'react'
 import { useTokenPrice } from './useTokenPrice'
 import { usePrevious } from '@hooks/usePrevious'
-
-const DEFAULT_PREV_TOKEN_SYMBOL = 'ETH'
-const DEFAULT_NEXT_TOKEN_SYMBOL = 'AAVE'
-
-const prevTokenAtom = atom<TokenType>(
-  tokenList.find((token) => token.symbol === DEFAULT_PREV_TOKEN_SYMBOL) ?? tokenList[0]
-)
-const nextTokenAtom = atom<TokenType>(
-  tokenList.find((token) => token.symbol === DEFAULT_NEXT_TOKEN_SYMBOL) ?? tokenList[0]
-)
+import { useSelectedToken } from './useSelectedToken'
 
 export const useTokenSwap = () => {
-  const [prevToken, setPrevToken] = useAtom(prevTokenAtom)
+  const { prevToken, nextToken, setPrevToken, setNextToken } = useSelectedToken()
   const {
     amount: prevTokenAmount,
     tokenPrice: prevTokenPrice,
@@ -26,7 +14,6 @@ export const useTokenSwap = () => {
   } = useTokenPrice(prevToken)
   const previousPrevTotalPrice = usePrevious(prevTotalPrice)
 
-  const [nextToken, setNextToken] = useAtom(nextTokenAtom)
   const {
     amount: nextTokenAmount,
     tokenPrice: nextTokenPrice,
