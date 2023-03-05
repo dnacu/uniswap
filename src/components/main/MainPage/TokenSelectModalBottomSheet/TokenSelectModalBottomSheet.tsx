@@ -46,7 +46,7 @@ export const TokenSelectModalBottomSheet: FC<TokenSelectModalBottomSheetProps> =
               <StyledCloseIcon onClick={onClose} />
             </HStack>
             <TokenSearchInput onChange={setSearchKeyword} />
-            <RecentlySelectedTokenList />
+            <RecentlySelectedTokenList onSelect={handleSelectToken} />
           </VStack>
 
           <Divider />
