@@ -29,13 +29,13 @@ export const TokenInputCard: FC<TokenInputCardProps> = ({
   return (
     <StyledPaper className={className} p={16} radius={12} bgColor="rgb(19, 26, 42)">
       <VStack gap={8}>
-        <HStack align="center" justify="space-between">
+        <HStack align="center" justify="space-between" gap={12}>
           <StyledTokenInput amount={token.amount} onChange={onTokenAmountChange} />
           <StyledTokenSelectChip selectedToken={token} onClick={openModal} />
         </HStack>
         <VStack>
           <Typography size={14} color="rgb(152, 161, 192)">
-            ${token.totalPrice}
+            ${new Intl.NumberFormat('en-US').format(token.totalPrice)}
           </Typography>
         </VStack>
       </VStack>

@@ -7,7 +7,7 @@ import { Typography } from '@components/common/Typography'
 import { VStack } from '@components/common/VStack'
 import { showPrepareAlert } from '@utils/showPrepareAlert'
 import styled from 'styled-components'
-import { useTokenPrice } from './hooks/useTokenPrice'
+import { useTokenSwap } from './hooks/useTokenSwap'
 import { TokenInputCard } from './TokenInputCard'
 
 export const MainPage = () => {
@@ -18,7 +18,7 @@ export const MainPage = () => {
     setNextToken,
     setPrevTokenAmount,
     setNextTokenAmount,
-  } = useTokenPrice()
+  } = useTokenSwap()
 
   const isSwapButtonActive = parseFloat(prevToken.amount) > 0 && parseFloat(nextToken.amount) > 0
 
