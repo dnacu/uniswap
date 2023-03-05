@@ -4,7 +4,7 @@ import { FC } from 'react'
 import styled, { css } from 'styled-components'
 import { TokenType } from 'types/Token'
 import { useSearchToken } from '../hooks/useSearchToken'
-import { useTokenPrice } from '../hooks/useTokenPrice'
+import { useTokenSwap } from '../hooks/useTokenSwap'
 
 type SearchResultTokenListProps = {
   query: string
@@ -13,7 +13,7 @@ type SearchResultTokenListProps = {
 
 export const SearchResultTokenList: FC<SearchResultTokenListProps> = ({ query, onSelect }) => {
   const { tokens } = useSearchToken(query)
-  const { prevToken, nextToken } = useTokenPrice()
+  const { prevToken, nextToken } = useTokenSwap()
 
   const handleSelect = (token: TokenType) => () => {
     onSelect(token)
